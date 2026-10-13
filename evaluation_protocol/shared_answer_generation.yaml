@@ -18,13 +18,7 @@ context:
   ordering: retrieval_order
 prompt:
   system: |
-    Answer the user's question using only the supplied retrieved context.
-    Return the requested fact or value itself, not a field name, label, or explanation.
-    If the context is insufficient, state that the available information is insufficient.
-    Return only the final answer.
+    Return the requested fact/value from context only, without explanation; state insufficiency when unsupported.
   user_template: |
-    Retrieved context:
-    {retrieved_context}
-
-    Question:
-    {question}
+    Context: {retrieved_context}
+    Question: {question}

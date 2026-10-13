@@ -1,0 +1,26 @@
+{
+  "version": "shared-local-qwen-generation-v3",
+  "model": {
+    "provider": "openai-compatible-local",
+    "base_url": "http://127.0.0.1:8000/v1",
+    "base_url_env": "OPENAI_BASE_URL",
+    "api_key_env": "OPENAI_API_KEY",
+    "name": "qwen3.5-4b-dev",
+    "name_env": "STATEGRAPH_LLM_MODEL",
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 512,
+    "seed": 42
+  },
+  "context": {
+    "max_items": 10,
+    "max_tokens": 16000,
+    "max_characters": 64000,
+    "token_estimator": "vllm_tokenize_endpoint",
+    "ordering": "retrieval_order"
+  },
+  "prompt": {
+    "system": "Return the requested fact/value from context only, without explanation; state insufficiency when unsupported.",
+    "user_template": "Context: {retrieved_context}\nQuestion: {question}"
+  }
+}
