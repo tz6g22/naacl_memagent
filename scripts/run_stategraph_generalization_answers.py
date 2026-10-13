@@ -19,7 +19,7 @@ from openai import OpenAI
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get("GENERALIZATION_OUT", ROOT / "outputs/stategraph_generalization_unseen10_v1"))
 MANIFEST = OUT / "METHOD_MANIFEST.json"
-GOLD_DATASET = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+GOLD_DATASET = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 MODEL = "gpt-5-nano"
 SYSTEM = (
     "Answer the user question using only the supplied retrieved context. "

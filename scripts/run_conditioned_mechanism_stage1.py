@@ -327,7 +327,7 @@ def _runtime_case(
 
 
 def _load_scb_cases(selected: set[str]) -> list[RuntimeCase]:
-    path = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
+    path = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
     rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
     cases: list[RuntimeCase] = []
     base = datetime(2025, 1, 1, tzinfo=UTC)
@@ -370,7 +370,7 @@ def _stale_session_text(session: list[dict[str, Any]], index: int) -> str:
 
 
 def _load_stale_cases(selected: set[str]) -> list[RuntimeCase]:
-    path = Path("/home/cody/data/stale/T1_T2_400_FULL.json")
+    path = Path("data/stale/T1_T2_400_FULL.json")
     rows = _load_json(path)
     cases: list[RuntimeCase] = []
     base = datetime(2025, 1, 1, tzinfo=UTC)
@@ -413,7 +413,7 @@ def _load_mab_cases(selected: set[str]) -> list[RuntimeCase]:
         import pyarrow.parquet as parquet
     except ImportError as exc:
         raise RuntimeError("CME runtime requires pyarrow for raw MAB inputs") from exc
-    path = Path("/home/cody/data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet")
+    path = Path("data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet")
     requested: dict[int, list[int]] = {}
     for case_id in selected:
         head, question = case_id.split("-question", maxsplit=1)

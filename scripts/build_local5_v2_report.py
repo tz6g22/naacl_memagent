@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'outputs/stategraph_local_benchmark_5case_v2'
 MANIFEST = json.loads((OUT/'CASE_MANIFEST_5.json').read_text())
 ids = {c['case_id'] for c in MANIFEST['cases']}
-gold = {r['case_id']: r for r in (json.loads(x) for x in open('/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_hardened.jsonl')) if r['case_id'] in ids}
+gold = {r['case_id']: r for r in (json.loads(x) for x in open('data/stategraphbenchmark/statechangebench_cases_001_050_hardened.jsonl')) if r['case_id'] in ids}
 sg = json.loads((OUT/'predictions/stategraph_retrieval.json').read_text())
 mech = json.loads((OUT/'mechanism_activation_stategraph.json').read_text())
 

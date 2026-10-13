@@ -17,7 +17,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "evaluation_audit_v2"
-DATA = Path("/home/cody/data/stategraphbenchmark")
+DATA = Path("data/stategraphbenchmark")
 V2 = DATA / "statechangebench_cases_001_050_v2.jsonl"
 V3 = DATA / "statechangebench_cases_001_050_v3_all_easy.jsonl"
 V2_SHA = "5d4e3112a711311c1e16ce6509fa5c7966359b791785d8695eb6a6a21f319296"

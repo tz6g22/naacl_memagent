@@ -12,7 +12,7 @@ from pathlib import Path
 from metrics import evaluate_case, write_outputs
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = Path('/home/cody/data/longmemeval/longmemeval_oracle.json')
+DATA = Path('data/longmemeval/longmemeval_oracle.json')
 OUT = ROOT / 'outputs' / 'baseline_long_10'
 PYTHONS = {name: ROOT / 'external_baselines' / name / '.venv' / 'bin' / 'python'
            for name in ('graphiti', 'mem0', 'amem', 'letta')}

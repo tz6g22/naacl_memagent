@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "stategraph_generalization_unseen10_v1"
-DATASET = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+DATASET = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 METHODS = ("StateGraph", "Graphiti", "Mem0", "A-MEM")
 
 

@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 FROZEN = ROOT / "outputs/stategraph_relation_typing_module_frozen_v1"
 OUT = ROOT / "outputs/stategraph_dependency_verification_module_v1"
-GOLD = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+GOLD = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 
 
 def _state(payload: dict[str, Any]):

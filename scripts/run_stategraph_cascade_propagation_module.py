@@ -25,7 +25,7 @@ VERIFICATION = ROOT / (
     "outputs/stategraph_dependency_verification_module_frozen_v1/verification_results.jsonl"
 )
 MAPPING = ROOT / "outputs/stategraph_dependency_candidate_module_frozen_v1/candidate_outputs.jsonl"
-GOLD = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+GOLD = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 OUT = Path(os.environ.get(
     "STATEGRAPH_CASCADE_OUT",
     ROOT / "outputs/stategraph_cascade_propagation_module_v1",

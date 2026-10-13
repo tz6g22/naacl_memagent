@@ -16,7 +16,7 @@ from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA_ROOT = Path('/home/cody/data')
+DATA_ROOT = Path('data')
 DEFAULT_OUTPUT = ROOT / 'outputs' / 'stategraph_agent_memory_10' / 'prepared'
 MAX_OBSERVATION_CHARS = 48_000
 UTC = timezone.utc

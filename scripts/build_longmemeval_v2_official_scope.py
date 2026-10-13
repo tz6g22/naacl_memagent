@@ -18,7 +18,7 @@ from stategraph.evaluation.prepare_agent_memory_10 import (
 )
 
 
-DATA = Path("/home/cody/data/longmemeval_v2")
+DATA = Path("data/longmemeval_v2")
 OUT = ROOT / "outputs/longmemeval_v2_stategraph_official_scope_v1"
 CASE_IDS = ["0f970f01", "100ff132", "106c321b"]
 UTC = timezone.utc

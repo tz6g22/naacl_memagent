@@ -24,7 +24,7 @@ def write(path: Path, value: object) -> None:
 
 
 def statechange() -> dict:
-    source = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+    source = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
     wanted = {"SCB_012", "SCB_013", "SCB_017"}
     rows = []
     for line in source.read_text(encoding="utf-8").splitlines():
@@ -55,7 +55,7 @@ def stale() -> dict:
 
 
 def longmemeval() -> dict:
-    source = Path("/home/cody/data/longmemeval/longmemeval_oracle.json")
+    source = Path("data/longmemeval/longmemeval_oracle.json")
     wanted = ["5d3d2817", "7527f7e2", "c960da58"]
     rows = {r["question_id"]: r for r in json.loads(source.read_text(encoding="utf-8"))}
     cases = []

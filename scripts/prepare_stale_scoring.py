@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 OUT = Path("outputs/stale_minimal_e2e_v1")
-DATA = Path("/home/cody/data/stale/T1_T2_400_FULL.json")
+DATA = Path("data/stale/T1_T2_400_FULL.json")
 
 
 def main() -> None:

@@ -13,7 +13,7 @@ def f1(a,b):
     o=sum((Counter(x)&Counter(y)).values())
     return 0 if not o else 2*(o/len(x))*(o/len(y))/((o/len(x))+(o/len(y)))
 def main():
-    answers=pq.read_table('/home/cody/data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['answers']).slice(0,1).to_pylist()[0]['answers']
+    answers=pq.read_table('data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['answers']).slice(0,1).to_pylist()[0]['answers']
     gold={f'row0-question{i}':([v] if isinstance(v,str) else [str(x) for x in v]) for i,v in enumerate(answers)}
     out={}; failures=[]
     for m in METHODS:

@@ -6,7 +6,7 @@ except ModuleNotFoundError:
  pq=None
 ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'outputs/stategraph_v4_memoryagentbench_state_transition_2case_test'; OUT.mkdir(parents=True,exist_ok=True)
 if pq:
- rows=pq.read_table('/home/cody/data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['context','questions']).to_pylist(); r=rows[4]; text=r['context']; questions=r['questions']
+ rows=pq.read_table('data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['context','questions']).to_pylist(); r=rows[4]; text=r['context']; questions=r['questions']
 else:
  old=json.loads((ROOT/'outputs/stategraph_v4_memoryagentbench_state_transition_small_test/prepared_gold_free.json').read_text()); text=old['memory_groups'][0]['observations'][0]['text']; questions=[None]*100
  # fixed questions are only used in the gold-free manifest; recover them from the frozen selection file

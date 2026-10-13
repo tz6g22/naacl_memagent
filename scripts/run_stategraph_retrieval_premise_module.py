@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT))
 EXTRACTION = ROOT / "outputs/stategraph_extraction_module_frozen_v1/extraction_outputs.jsonl"
 SNAPSHOTS = ROOT / "outputs/stategraph_cascade_propagation_module_v1/final_graph_snapshots.jsonl"
 REVISION = ROOT / "outputs/stategraph_revision_module_frozen_v1/revision_outputs.jsonl"
-GOLD = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+GOLD = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 OUT = Path(os.environ.get(
     "STATEGRAPH_RETRIEVAL_OUT",
     ROOT / "outputs/stategraph_retrieval_premise_module_v1",

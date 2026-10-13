@@ -15,8 +15,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "outputs" / "evaluation_audit_v1"
 MATRIX = ROOT / "outputs" / "minimal_all_dataset_stategraph_vs_mem0_gpt5nano_v1"
-SCB_V2 = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
-SCB_V3 = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
+SCB_V2 = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+SCB_V3 = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
 
 
 def read_json(path: Path) -> Any:
