@@ -28,7 +28,7 @@ REVISION = Path(os.environ.get(
 ))
 GOLD = Path(os.environ.get(
     'STATEGRAPH_CANDIDATE_GOLD',
-    '/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl',
+    'data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl',
 ))
 OUT = Path(os.environ.get(
     'STATEGRAPH_CANDIDATE_OUT',

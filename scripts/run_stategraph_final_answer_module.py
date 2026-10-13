@@ -22,7 +22,7 @@ from stategraph.final_answer import build_answer_input, parse_answer
 
 ROOT = Path(__file__).resolve().parents[1]
 FROZEN_RETRIEVAL = ROOT / "outputs" / "stategraph_retrieval_premise_module_frozen_v1"
-DATASET = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+DATASET = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 
 
 def _sha256(data: bytes) -> str:

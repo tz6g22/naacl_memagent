@@ -276,7 +276,7 @@ def _token_f1(actual: str, expected: str) -> float:
 
 
 def _scb_reference(case_id: str) -> dict[str, Any]:
-    path = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
+    path = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
     for line in path.read_text(encoding="utf-8").splitlines():
         row = json.loads(line)
         if row.get("case_id") == case_id:

@@ -18,7 +18,7 @@ from stategraph.evaluation.graphiti_runtime import create_llm
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA_ROOT = Path('/home/cody/data')
+DATA_ROOT = Path('data')
 RUN_ROOT = ROOT / 'outputs' / 'stategraph_agent_memory_10' / 'runs'
 DATASETS = (
     'longmemeval',

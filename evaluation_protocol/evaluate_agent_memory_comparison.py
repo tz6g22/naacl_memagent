@@ -28,7 +28,7 @@ from agent_memory_comparison_common import (
 )
 
 
-DATA_ROOT = Path('/home/cody/data')
+DATA_ROOT = Path('data')
 MAB_PATH = (
     DATA_ROOT
     / 'memoryagentbench'

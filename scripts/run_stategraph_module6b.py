@@ -28,7 +28,7 @@ from run_stategraph_e2e_integration import Gpt5Client, _dump
 ROOT = Path(__file__).resolve().parents[1]
 PHASE_A = ROOT / "outputs/stategraph_production_module5_wiring_v4"
 OUT = ROOT / "outputs/stategraph_production_module6b_verifier_isolation_v1"
-DATASET = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+DATASET = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 UTC = timezone.utc
 STOPWORDS = {"the", "a", "an", "for", "of", "on", "to", "and", "with"}
 

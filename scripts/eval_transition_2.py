@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'outputs/stategraph_v4_memory
 def n(s): return ' '.join(re.sub(r'\b(a|an|the)\b',' ',''.join(c for c in s.lower() if c not in string.punctuation)).split())
 def f(a,b):
  x,y=n(a).split(),n(b).split(); o=sum((Counter(x)&Counter(y)).values()); return 0 if not o else 2*(o/len(x))*(o/len(y))/((o/len(x))+(o/len(y)))
-rows=pq.read_table('/home/cody/data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['answers']).to_pylist(); ans=rows[4]['answers']; gold={'row4-question52':ans[52],'row4-question81':ans[81]}; out={}
+rows=pq.read_table('data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['answers']).to_pylist(); ans=rows[4]['answers']; gold={'row4-question52':ans[52],'row4-question81':ans[81]}; out={}
 for m in METHODS:
  ps=[json.loads(x) for x in (OUT/m/'predictions.jsonl').read_text().splitlines() if x.strip()]; rr=[]
  for p in ps:

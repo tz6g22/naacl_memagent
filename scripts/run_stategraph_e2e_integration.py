@@ -26,7 +26,7 @@ from stategraph.state.native_extraction import STATE_EXTRACTION_OUTPUT_SCHEMA
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATASET = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+DATASET = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 OUT = Path(os.environ.get("STATEGRAPH_E2E_OUT", ROOT / "outputs" / "stategraph_e2e_integration_dev_v1"))
 MODEL = "gpt-5-nano"
 STOP_AFTER = os.environ.get("STATEGRAPH_E2E_STOP_AFTER")

@@ -16,7 +16,7 @@ from stategraph.evaluation.prepare_agent_memory_10 import (  # noqa: E402
     _sha256_text,
 )
 
-DATA = Path("/home/cody/data/memora/data/weekly/academic_researcher")
+DATA = Path("data/memora/data/weekly/academic_researcher")
 OUT = ROOT / "outputs/stategraph_memora_connectivity_v1"
 UTC = timezone.utc
 

@@ -21,7 +21,7 @@ from stategraph.state import ConditionScope, StateLinker, StateNode, StateStatus
 ROOT = Path(__file__).resolve().parents[1]
 RAW_RUN = Path(os.environ.get("STATEGRAPH_LINKING_RAW_RUN", ROOT / "outputs/stategraph_e2e_integration_dev_v1"))
 OUT = Path(os.environ.get("STATEGRAPH_LINKING_OUT", ROOT / "outputs/stategraph_production_equivalent_linking_module2b_v1"))
-DATASET = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
+DATASET = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v2.jsonl")
 
 
 def _parse_dt(value: Any) -> datetime | None:

@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'outputs/stategraph_v4_memoryagentbench_state_transition_small_test'
 OUT.mkdir(parents=True,exist_ok=True)
 spec=[(4,52),(4,81),(5,51)]
-rows=pq.read_table('/home/cody/data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['context','questions','metadata']).to_pylist()
+rows=pq.read_table('data/memoryagentbench/data/Conflict_Resolution-00000-of-00001.parquet',columns=['context','questions','metadata']).to_pylist()
 cases=[]; mem=[]; mem_by_id={}
 for ri,qi in spec:
     r=rows[ri]; mid=f'memoryagentbench-conflict-row{ri}'; text=r['context']

@@ -112,7 +112,7 @@ def _case_reference(case_id: str, dataset: str) -> dict[str, Any]:
     """Load evaluator-only upstream requirements after the inference seal."""
 
     if dataset == "StateChangeBench":
-        path = Path("/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
+        path = Path("data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl")
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
@@ -132,7 +132,7 @@ def _case_reference(case_id: str, dataset: str) -> dict[str, Any]:
                 }
         raise RuntimeError(f"missing SCB case {case_id}")
     if dataset == "STALE":
-        rows = _load_json(Path("/home/cody/data/stale/T1_T2_400_FULL.json"))
+        rows = _load_json(Path("data/stale/T1_T2_400_FULL.json"))
         row = next((item for item in rows if item.get("uid") == case_id), None)
         if row is None:
             raise RuntimeError(f"missing STALE case {case_id}")

@@ -20,13 +20,13 @@ def ref_map(ds):
     if ds=='statechangebench':
         source = Path(__import__('os').environ.get(
             'STATECHANGEBENCH_SOURCE',
-            '/home/cody/data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl',
+            'data/stategraphbenchmark/statechangebench_cases_001_050_v3_all_easy.jsonl',
         ))
         return {x['case_id']:[x['gold_answer']] for x in map(json.loads,source.read_text().splitlines()) if x['case_id'] in {'SCB_012','SCB_013','SCB_017'}}
     if ds=='longmemeval':
-        return {x['question_id']:[x['answer']] if isinstance(x['answer'],str) else x['answer'] for x in json.loads(Path('/home/cody/data/longmemeval/longmemeval_oracle.json').read_text()) if x['question_id'] in {'5d3d2817','7527f7e2','c960da58'}}
+        return {x['question_id']:[x['answer']] if isinstance(x['answer'],str) else x['answer'] for x in json.loads(Path('data/longmemeval/longmemeval_oracle.json').read_text()) if x['question_id'] in {'5d3d2817','7527f7e2','c960da58'}}
     if ds=='longmemeval_v2':
-        return {x['id']:[x['answer']] if isinstance(x['answer'],str) else x['answer'] for x in (json.loads(line) for line in Path('/home/cody/data/longmemeval_v2/questions.jsonl').read_text().splitlines()) if x['id']=='0f970f01'}
+        return {x['id']:[x['answer']] if isinstance(x['answer'],str) else x['answer'] for x in (json.loads(line) for line in Path('data/longmemeval_v2/questions.jsonl').read_text().splitlines()) if x['id']=='0f970f01'}
     if ds=='mab_conflict':
         source = OUT/'mab_gold_after_seal.json'
         if not source.exists():
