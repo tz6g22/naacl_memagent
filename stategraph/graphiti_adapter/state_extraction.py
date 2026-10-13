@@ -25,7 +25,7 @@ from stategraph.state.schema import (
 )
 from stategraph.state.contracts import ExtractionResult
 from stategraph.state.provenance import attach_canonical_slot_provenance
-from stategraph.evaluation.profiling import StageProfiler
+from stategraph.runtime.profiling import StageProfiler
 from stategraph.state.native_extraction import (
     DEFAULT_EXTRACTION_MAX_INPUT_CHARACTERS,
     PromptMessage,
@@ -116,8 +116,8 @@ class GraphitiLLMStateExtractor:
             llm_client,
             max_output_tokens=8192,
             max_input_characters=max_llm_characters,
-            # Keep the compatibility facade usable with the small limits used
-            # by legacy tests/callers; the default 400-character overlap must
+            # Keep the compatibility facade usable with small caller-provided limits;
+            # the default 400-character overlap must
             # not exceed a caller-provided chunk size.
             chunk_overlap=min(400, max_llm_characters // 4),
             trace_path=trace_path,

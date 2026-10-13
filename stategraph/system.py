@@ -53,7 +53,7 @@ from stategraph.state.contracts import (
     StateExtractor,
 )
 from stategraph.state.dependency import DependencyAssessment, DependencyCandidate
-from stategraph.evaluation.profiling import StageProfiler
+from stategraph.runtime.profiling import StageProfiler
 from stategraph.storage import InMemoryStateRepository, StateRepository
 
 
@@ -515,8 +515,7 @@ class StateGraph:
                     # fallback when no candidate is decisive.
                     state, links = self.linker.resolve(state, linking_existing)
                 if candidates is not None:
-                    # Explicit candidate injection is the deterministic unit-test
-                    # contract; retain its historical sequential behavior.
+                    # Explicit candidate injection preserves caller-supplied candidate ordering.
                     revision = await self.revision.revise(state, links)
                     self._write_revision_trace(
                         observation=observation,
@@ -708,7 +707,7 @@ class StateGraph:
                         await verified if inspect.isawaitable(verified) else verified
                     )
             else:
-                # Compatibility path for backend-independent test extractors.  The
+                # Compatibility path for custom backend-independent extractors.  The
                 # production Graphiti extractor always exposes the split contract above.
                 discover = getattr(self.extractor, 'discover_and_verify_dependencies', None)
                 if discover is not None and new_states:

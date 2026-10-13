@@ -24,7 +24,7 @@ from stategraph.relation_typing import (
     semantic_role,
     structural_dependency_direction,
 )
-from stategraph.evaluation.provider_resilience import (
+from stategraph.runtime.provider_resilience import (
     SEMANTIC_CONTRACT_FAILURE,
     ContractViolation,
     FinishReasonIncomplete,
@@ -32,7 +32,7 @@ from stategraph.evaluation.provider_resilience import (
     bounded_async_call,
     classify_error,
 )
-from stategraph.evaluation.profiling import StageProfiler
+from stategraph.runtime.profiling import StageProfiler
 from stategraph.state.native_extraction import PromptMessage
 
 
@@ -879,7 +879,7 @@ class CounterfactualDependencyVerifier:
         """Verify one typed candidate with all endpoint evidence grounded.
 
         Production uses this narrow contract.  The existing batch ``verify``
-        method remains for compatibility with its deterministic unit tests.
+        method remains for compatibility with deterministic callers.
         """
         state_by_id = {state.state_id: state for state in states}
         endpoint_states = (

@@ -71,7 +71,7 @@ class ShadowRevisionRecord:
 
 
 class TypedStateFrameShadowRepository:
-    """A write-only-for-tests typed repository; never connected to production."""
+    """An isolated typed shadow repository; not connected to the StateGraph runtime."""
 
     path_name = "S2_TYPED_STATEFRAME"
 

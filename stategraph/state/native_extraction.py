@@ -18,8 +18,8 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from stategraph.evaluation.profiling import StageProfiler
-from stategraph.evaluation.provider_resilience import FinishReasonIncomplete
+from stategraph.runtime.profiling import StageProfiler
+from stategraph.runtime.provider_resilience import FinishReasonIncomplete
 
 from .contracts import ExtractionResult
 from .factual_relations import (

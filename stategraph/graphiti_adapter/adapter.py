@@ -11,7 +11,7 @@ from typing import Any
 
 from stategraph.state.extraction import GraphitiFact
 from stategraph.state.schema import EvidenceRecord, Observation
-from stategraph.evaluation.profiling import StageProfiler
+from stategraph.runtime.profiling import StageProfiler
 
 from .evidence import evidence_from_graphiti_fact
 

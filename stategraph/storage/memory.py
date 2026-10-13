@@ -1,4 +1,4 @@
-"""Deterministic in-memory repository for local runs and unit tests."""
+"""Deterministic in-memory repository for local execution."""
 
 from __future__ import annotations
 
