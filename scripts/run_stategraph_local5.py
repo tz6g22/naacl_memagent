@@ -157,63 +157,8 @@ async def run_stategraph() -> None:
     (OUT / 'mechanism_activation_stategraph.json').write_text(json.dumps(mechanism, ensure_ascii=False, indent=2), encoding='utf-8')
 
 
-def _public(value):
-    if value is None or isinstance(value, (str, int, float, bool)):
-        return value
-    if hasattr(value, 'model_dump'):
-        return _public(value.model_dump())
-    if isinstance(value, dict):
-        return {str(k): _public(v) for k, v in value.items() if 'embedding' not in str(k).casefold()}
-    if isinstance(value, (list, tuple)):
-        return [_public(v) for v in value]
-    if hasattr(value, '__dict__'):
-        return _public(vars(value))
-    return str(value)
-
-
-def run_baseline(name: str) -> None:
-    sys.path.insert(0, str(ROOT / 'external_baselines' / 'e2e_validation'))
-    from adapters import create_adapter
-    payload = json.loads(MANIFEST.read_text(encoding='utf-8'))
-    out = OUT / 'predictions' / name
-    out.mkdir(parents=True, exist_ok=True)
-    records = []
-    for case in payload['cases']:
-        case_out = out / case['case_id']
-        case_out.mkdir(parents=True, exist_ok=True)
-        (case_out / 'backend_state').mkdir(parents=True, exist_ok=True)
-        adapter = None
-        try:
-            adapter = create_adapter(name, case_out / 'backend_state')
-            adapter.reset()
-            observations = list(case['history']) + [case['new_observation']]
-            for item in observations:
-                adapter.add_memory(item['text'])
-            retrieved = adapter.query(case['query'])
-            records.append({
-                'method': name, 'case_id': case['case_id'], 'question': case['query'],
-                'status': 'ready', 'retrieved_context': _public(retrieved),
-            })
-        except Exception as exc:
-            records.append({
-                'method': name, 'case_id': case['case_id'], 'question': case['query'],
-                'status': 'INCOMPLETE', 'retrieved_context': [],
-                'error': f'{type(exc).__name__}: {exc}',
-            })
-        finally:
-            if adapter is not None and hasattr(adapter, 'close'):
-                try:
-                    adapter.close()
-                except Exception:
-                    pass
-    (out / 'retrieval.json').write_text(json.dumps(records, ensure_ascii=False, indent=2, default=str), encoding='utf-8')
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('mode', choices=['stategraph', 'graphiti', 'mem0', 'amem', 'letta'])
-    args = parser.parse_args()
-    if args.mode == 'stategraph':
-        asyncio.run(run_stategraph())
-    else:
-        run_baseline(args.mode)
+    parser.add_argument('mode', choices=['stategraph'], nargs='?', default='stategraph')
+    parser.parse_args()
+    asyncio.run(run_stategraph())
