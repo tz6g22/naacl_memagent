@@ -45,7 +45,6 @@ OUT = Path(os.environ.get('STATEGRAPH_STALE_OUT', ROOT / "outputs/stale_minimal_
 CASE_INPUT = Path(os.environ.get(
     'STATEGRAPH_STALE_INPUT', OUT / 'selected_cases.json'
 ))
-METHODS = {"mem0", "amem", "graphiti", "stategraph"}
 
 
 def _structured_retry_taxonomies(prompt_name: str | None) -> set[str]:
@@ -489,65 +488,6 @@ def checkpoint_identity(case: dict[str, Any], case_dir: Path, method: str) -> di
     }
 
 
-def run_baseline(method: str, cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    from external_baselines.e2e_validation.adapters import create_adapter
-
-    rows: list[dict[str, Any]] = []
-    for case in cases:
-        case_id = case["case_id"]
-        state_dir = OUT / "runtime" / method / case_id
-        state_dir.mkdir(parents=True, exist_ok=True)
-        started = time.perf_counter()
-        operation_count = 0
-        adapter = None
-        try:
-            adapter = create_adapter(method, state_dir)
-            for index, session in enumerate(case["haystack_session"]):
-                adapter.add_memory(session_text(session, index))
-                operation_count += 1
-            queries: dict[str, Any] = {}
-            for dim, query in case["probing_queries"].items():
-                query_started = time.perf_counter()
-                queries[dim] = {
-                    "query": query,
-                    "result": dump(adapter.query(query)),
-                    "latency_seconds": time.perf_counter() - query_started,
-                }
-                operation_count += 1
-            row = {
-                "case_id": case_id,
-                "method": method,
-                "status": "ready",
-                "type": case.get("type"),
-                "queries": queries,
-                "ingested_session_count": len(case["haystack_session"]),
-                "operation_count": operation_count,
-                "latency_seconds": time.perf_counter() - started,
-            }
-        except Exception as exc:
-            row = {
-                "case_id": case_id,
-                "method": method,
-                "status": "INCOMPLETE",
-                "error_class": type(exc).__name__,
-                "error": str(exc),
-                "operation_count": operation_count,
-                "latency_seconds": time.perf_counter() - started,
-            }
-        finally:
-            if adapter is not None and hasattr(adapter, "close"):
-                try:
-                    adapter.close()
-                except Exception:
-                    pass
-        rows.append(row)
-        path = OUT / "raw" / f"{method}_retrieval.jsonl"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("\n".join(json.dumps(item, ensure_ascii=False, default=str) for item in rows) + "\n", encoding="utf-8")
-        print(json.dumps({"method": method, "case_id": case_id, "status": row["status"]}), flush=True)
-    return rows
-
-
 async def run_stategraph(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
     from run_stategraph_e2e_integration import _dump
     from stategraph.graphiti_adapter.state_extraction import GraphitiLLMStateExtractor
@@ -768,21 +708,13 @@ async def run_stategraph(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("method", choices=sorted(METHODS))
+    parser.add_argument("method", choices=("stategraph",), nargs="?", default="stategraph")
     args = parser.parse_args()
     cases = load_cases()
     case_index = os.environ.get('STATEGRAPH_STALE_CASE_INDEX')
     if case_index is not None:
         cases = [cases[int(case_index)]]
-    # Baselines create local migration/cache files under HOME; keep those
-    # execution artifacts inside this run and out of the user's home tree.
-    runtime_home = OUT / "runtime" / args.method / "home"
-    runtime_home.mkdir(parents=True, exist_ok=True)
-    os.environ["HOME"] = str(runtime_home)
-    if args.method == "stategraph":
-        asyncio.run(run_stategraph(cases))
-    else:
-        run_baseline(args.method, cases)
+    asyncio.run(run_stategraph(cases))
 
 
 if __name__ == "__main__":
